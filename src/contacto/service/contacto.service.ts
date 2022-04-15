@@ -45,7 +45,7 @@ export class ContactoService {
   }
 
   async getAllContactos(): Promise<Contacto[]> {
-    return await this.ContactoModel.find().populate('user').exec();
+    return await this.ContactoModel.find({bloqueio: false}).populate('user').exec();
   }
 
   async getContactoById(_id: string): Promise<Contacto> {

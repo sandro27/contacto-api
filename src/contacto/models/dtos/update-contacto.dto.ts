@@ -7,4 +7,7 @@ export class UpdateContactoDto {
 
   @ApiProperty()
   contacto: number;
+
+  @ApiProperty()
+  bloqueio: boolean;
 }
