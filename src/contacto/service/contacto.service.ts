@@ -48,6 +48,10 @@ export class ContactoService {
     return await this.ContactoModel.find({bloqueio: false}).populate('user').exec();
   }
 
+  async getAllContactosBloqueiados(): Promise<Contacto[]> {
+    return await this.ContactoModel.find({bloqueio: true}).populate('user').exec();
+  }
+
   async getContactoById(_id: string): Promise<Contacto> {
     const ContactoAlreadyExists = await this.ContactoModel.findById(_id)
       .populate('user')
@@ -57,9 +61,4 @@ export class ContactoService {
     return ContactoAlreadyExists;
   }
 
-  async deleteContacto(_id: string): Promise<Contacto> {
-    const deleteContacto = await this.ContactoModel.findByIdAndDelete(_id);
-    if (!deleteContacto) throw new NotFoundException(`Contacto is not Exists`);
-    return deleteContacto;
-  }
 }

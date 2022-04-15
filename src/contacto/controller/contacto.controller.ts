@@ -69,16 +69,18 @@ export class ContactoController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Get('bloqueados')
+  async getAllContactosBloqueado(@Res() res) {
+    const Contactos = await this.contactoService.getAllContactosBloqueiados();
+    return res.status(HttpStatus.OK).json(Contactos);
+  }
+
+
+  @UseGuards(JwtAuthGuard)
   @Get('/:_id')
   async getContactoById(@Res() res, @Param('_id') _id: string) {
     const Contacto = await this.contactoService.getContactoById(_id);
     return res.status(HttpStatus.OK).json(Contacto);
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Delete('/:_id')
-  async deleteContacto(@Res() res, @Param('_id') _id: string) {
-    await this.contactoService.deleteContacto(_id);
-    return res.status(HttpStatus.OK);
-  }
 }
